@@ -33,5 +33,4 @@ public class DefenceGame {
 		}
 		return answer;
 	}
-
 }
