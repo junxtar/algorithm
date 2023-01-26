@@ -14,7 +14,7 @@ public class IntTriangle {
 			for (int j = 1; j < i; j++)
 				triangle[i][j] += Math.max(triangle[i - 1][j - 1], triangle[i - 1][j]);
 		}
-		//최대값은 항상 마지막 행에 있으므로 마지막 행에 있는 최댓값을리턴 
+		//최대값은 항상 마지막 행에 있으므로 마지막 행에 있는 최댓값을 리턴 
 		return Arrays.stream(triangle[triangle.length - 1]).max().getAsInt();
 	}
 }
