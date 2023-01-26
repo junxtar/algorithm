@@ -12,7 +12,6 @@ public class number_1244 {
 	public static void main(String[] args) throws IOException{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st;
-		
 		int N = Integer.parseInt(br.readLine());
 		int[]arr = new int[N + 1];
 		
