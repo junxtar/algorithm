@@ -19,11 +19,11 @@ public class WordTransformation {
 
 	public int solution(String begin, String target, String[] words) {
 		visited = new boolean[words.length];
-		return dfs(begin, target, words);
+		return bfs(begin, target, words);
 
 	}
 
-	static int dfs(String begin, String target, String[] words) {
+	static int bfs(String begin, String target, String[] words) {
 		Queue<Node> q = new LinkedList<>();
 		q.offer(new Node(begin, 0));
 
