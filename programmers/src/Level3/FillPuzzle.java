@@ -39,7 +39,7 @@ public class FillPuzzle {
 		for (int i = 0; i < boardSize; i++) {
 			for (int j = 0; j < boardSize; j++) {
 				if (game_board[i][j] == 0 && !visited[i][j]) {
-					empty.add(dfs(game_board, i, j, 0));
+					empty.add(bfs(game_board, i, j, 0));
 				}
 			}
 		}
@@ -50,7 +50,7 @@ public class FillPuzzle {
 		for (int i = 0; i < boardSize; i++) {
 			for (int j = 0; j < boardSize; j++) {
 				if (table[i][j] == 1 && !visited[i][j])
-					block.add(dfs(table, i, j, 1));
+					block.add(bfs(table, i, j, 1));
 			}
 		}
 
@@ -73,7 +73,7 @@ public class FillPuzzle {
 		return answer;
 	}
 
-	static ArrayList<Node> dfs(int[][] board, int row, int col, int type) {
+	static ArrayList<Node> bfs(int[][] board, int row, int col, int type) {
 		Queue<Node> q = new LinkedList<>();
 		ArrayList<Node> result = new ArrayList<>();
 		q.offer(new Node(row, col));
