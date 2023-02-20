@@ -22,7 +22,6 @@ public class TheFurthestNode {
 
 	public int solution(int n, int[][] edge) {
 		
-		int answer = 0;
 		visited = new int[n + 1];
 		
 		for (int i = 0; i <= n; i++) {
@@ -36,12 +35,7 @@ public class TheFurthestNode {
 		bfs(1);
 		
 		int max = Arrays.stream(visited).max().getAsInt();
-		
-		for (int i = 2; i < visited.length; i++) {
-			if (max == visited[i])
-				answer++;
-		}
-		return answer;
+		return (int)Arrays.stream(visited).filter(m -> m==max).count();
 	}
 
 	static void bfs(int x) {
