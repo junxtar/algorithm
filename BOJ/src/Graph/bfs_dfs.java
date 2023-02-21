@@ -29,9 +29,9 @@ public class bfs_dfs {
 			map[a][b] = 1;
 			map[b][a] = 1;
 		}
-		dfs(v);
-		sb.append("\n");
 		bfs(v);
+		sb.append("\n");
+		dfs(v);
 		System.out.println(sb);
 				
 	}
