@@ -1,26 +1,19 @@
 package Level2;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.HashMap;
 
 public class test {
 
-	public static void main(String[] args) throws IOException {
-		String[] arr = { "9912", "9921", "1299" };
-
-		String answer = "01:02";
-		ArrayList<Integer> list = new ArrayList<>();
-		list.add(1);
-		list.add(3);
-		list.add(5);
-		System.out.println(Collections.binarySearch(list, 4));
+	public static void main(String[] args) {
+		HashMap<String, Integer>map = new HashMap<>();
+		map.put("aa", 3);
+		map.put("aa", map.get("aa") - 1);
 		
-		Arrays.sort(arr);
-		String hour = answer.substring(0, 2);
-		String min = answer.substring(3, 5);
-		System.out.println(hour + " " + min);
+		System.out.print(map.get("aa"));
+		
 	}
-
+	//ab ba ab
+	//ba ab ba
+	//ab ba 2
+	//4 
 }
