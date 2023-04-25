@@ -3,8 +3,8 @@ package Dijkstra;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.Arrays;
+import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 public class number_6087 {
@@ -12,18 +12,21 @@ public class number_6087 {
 	static class Node {
 		int x;
 		int y;
-
-		Node(int x, int y) {
+		int w;
+		int dir;
+		Node(int x, int y, int w,int dir) {
 			this.x = x;
 			this.y = y;
+			this.w = w;
+			this.dir = dir;
 		}
 	}
 
 	static int W, H;
 	static int endX, endY = 0;
-	static int[][] dist;
+	static int[][][] dist;
 	static char[][] map;
-	static Node[][] nodeMap;
+	static final int INF = 10001;
 	static int[] dxy = { 1, 0, -1, 0, 1 };
 
 	public static void main(String[] args) throws IOException {
@@ -31,98 +34,61 @@ public class number_6087 {
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		W = Integer.parseInt(st.nextToken());
 		H = Integer.parseInt(st.nextToken());
-		dist = new int[H][W];
+		dist = new int[H][W][2];
 		map = new char[H][W];
-		nodeMap = new Node[H][W];
-		int startX = 0;
-		int startY = 0;
-
+		int startX = -1;
+		int startY = -1;
+		
 		for (int i = 0; i < H; i++) {
 			String str = br.readLine();
 			for (int j = 0; j < W; j++) {
+				Arrays.fill(dist[i][j], INF);
 				char element = str.charAt(j);
 				map[i][j] = element;
-				nodeMap[i][j] = new Node(0, 0);
-				if (element == 'C') {
+				if (element == 'C' && startX == -1) {
 					startX = i;
 					startY = j;
 				}
+				if (element == 'C' && startX != -1) {
+					endX = i;
+					endY = j;
+				}
 				if (element == '*')
 					continue;
-				dist[i][j] = Integer.MAX_VALUE;
-
 			}
 		}
-
-		dijkstra(startX, startY);
-		
-		int flag = 0;
-		boolean isX = false;
-		int x, y = 0;
-		x = endX;
-		y = endY;
-		int cnt = 0;
-		if (endX != nodeMap[endX][endY].x) {
-			flag = endX;
-			isX = true;
-		} else {
-			flag = endY;
-		}
-		
-		while (nodeMap[endX][endY].x != 0 && nodeMap[endX][endY].y != 0) {
-			endX = nodeMap[x][y].x; 
-			endY = nodeMap[x][y].y; 
-			x = endX;
-			y = endY;
-			if (!isX) {
-				if (endY == flag) {
-					isX = true;
-					cnt++;
-					flag = endX;
-				} else {
-					flag = endY; 
-				}
-
-			} else {
-				if (endX == flag) {
-					isX = false;
-					cnt++;
-					flag = endY;
-				} else {
-					flag = endX;
-				}
-			}
-		}
-		System.out.println(cnt);
+		System.out.println(dijkstra(startX, startY)); 
 	}
-
-	static void dijkstra(int startX, int startY) {
-		Queue<Node> q = new LinkedList<>();
-		q.offer(new Node(startX, startY));
-		dist[startX][startY] = 0;
-
-		while (!q.isEmpty()) {
-			Node cur = q.poll();
-			if (map[cur.x][cur.y] == 'C' && cur.x != startX && cur.y != startY) {
-				endX = cur.x;
-				endY = cur.y;
-				break;
+	
+	static int dijkstra(int startX, int startY) {
+		PriorityQueue<Node> pq = new PriorityQueue<>((o1, o2) -> o1.w - o2.w);
+		pq.offer(new Node(startX, startY, 0, 0));
+		pq.offer(new Node(startX, startY, 0, 1));
+		dist[startX][startY][0] = 0;
+		dist[startX][startY][1] = 0;
+		while (!pq.isEmpty()) {
+			Node cur = pq.poll();
+			
+			if (dist[cur.x][cur.y][cur.dir] < cur.w) {
+				continue;
 			}
 			for (int i = 0; i < 4; i++) {
 				int nx = cur.x + dxy[i];
 				int ny = cur.y + dxy[i + 1];
-
-				if (nx < 0 | nx >= H | ny < 0 | ny >= W)
-					continue;
-				if (map[nx][ny] == '*')
-					continue;
-				if (dist[nx][ny] > dist[cur.x][cur.y] + 1) {
-					dist[nx][ny] = dist[cur.x][cur.y] + 1;
-					nodeMap[nx][ny] = new Node(cur.x, cur.y);
-
-					q.offer(new Node(nx, ny));
-				}
+				
+				if (nx < 0 | nx >= H | ny < 0 | ny >= W) continue;
+				if (map[nx][ny] == '*') continue;
+				
+				int dir = i % 2; 
+				
+				int turn = dir == cur.dir || cur.dir == 4 ? 0 : 1;
+				
+				if (dist[nx][ny][dir] > cur.w + turn) {
+					dist[nx][ny][dir] = cur.w + turn;
+					pq.offer(new Node(nx, ny, dist[nx][ny][dir], dir));
+				} 
 			}
 		}
+		return Math.min(dist[endX][endY][0], dist[endX][endY][1]);
 	}
 }
