@@ -45,20 +45,26 @@ public class number_26009 {
 			trafficCongestion(row, col, distance);
 		}
 	
-		bfs(0, 0);
-		if (map[N-1][M-1] == 0) {
-			System.out.println("NO");
-			return;
-		}
-		sb.append("YES").append("\n").append(map[N-1][M-1]);
-		System.out.println(sb.toString());
+	
+//		bfs(0, 0);
+//		if (map[N-1][M-1] == 0) {
+//			System.out.println("NO");
+//			return;
+//		}
+//		sb.append("YES").append("\n").append(map[N-1][M-1]);
+//		System.out.println(sb.toString());
 
 	}
 
 	static void trafficCongestion(int row, int col, int distance) {
-		if (distance == 0) {
-			visited[row][col] = true;
-			return;
+		
+		for (int i = row - distance; i <= row + distance; i++) {
+			for (int j = col - distance; j <= col + distance; j++) {
+				if (Math.abs(i - row) + Math.abs(j - col) == distance) {
+					if (i < 0 | i >=N| j < 0 | j >= M)	continue;
+					visited[i][j] = true;
+				}
+			}
 		}
 		
 	}
