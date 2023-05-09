@@ -31,15 +31,15 @@ public class number_1197_prim {
 		int E = Integer.parseInt(st.nextToken());
 		
 		grapgh = new ArrayList<>();
-		visited = new boolean[V];
-		for (int i = 0; i < V; i++) {
+		visited = new boolean[V + 1];
+		for (int i = 0; i <= V; i++) {
 			grapgh.add(new ArrayList<>());
 		}
 		
 		while(E --> 0) {
 			st = new StringTokenizer(br.readLine());
-			int u = Integer.parseInt(st.nextToken()) - 1;
-			int v = Integer.parseInt(st.nextToken()) - 1;
+			int u = Integer.parseInt(st.nextToken());
+			int v = Integer.parseInt(st.nextToken());
 			int w = Integer.parseInt(st.nextToken());
 			
 			grapgh.get(u).add(new Node(v, w));
