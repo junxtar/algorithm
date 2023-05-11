@@ -55,7 +55,9 @@ public class number_2096 {
 				}
 			}
 		}
+		
 		int value;
+		
 		if (isMax) {
 			value = 0;
 		} else {
