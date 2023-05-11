@@ -21,7 +21,6 @@ public class number_1005 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st;
 		int T = Integer.parseInt(br.readLine());
-		
 		while(T --> 0) {
 			st = new StringTokenizer(br.readLine());
 			N = Integer.parseInt(st.nextToken());
