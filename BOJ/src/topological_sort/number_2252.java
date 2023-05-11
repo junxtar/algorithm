@@ -35,6 +35,7 @@ public class number_2252 {
 		topologicalSort();
 		System.out.println(sb.toString());
 	}
+	
 	static void topologicalSort() {
 		Queue<Integer> q = new LinkedList<>();
 		for (int i = 1; i < seq.length; i++) {
