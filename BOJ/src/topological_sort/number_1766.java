@@ -34,6 +34,7 @@ public class number_1766 {
 
 		seq = new int[N + 1];
 		grapgh = new ArrayList<>();
+		
 		for (int i = 0; i < N + 1; i++) {
 			grapgh.add(new ArrayList<>());
 		}
