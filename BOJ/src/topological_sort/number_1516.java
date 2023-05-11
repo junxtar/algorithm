@@ -25,9 +25,11 @@ public class number_1516 {
 		seq = new int[N + 1];
 		values = new int[N + 1];
 		dp = new int[N + 1];
+		
 		for (int i = 0; i < N + 1; i++) {
 			grapgh.add(new ArrayList<>());
 		}
+		
 		for (int i = 1; i <= N; i++) {
 			st = new StringTokenizer(br.readLine());
 			int value = Integer.parseInt(st.nextToken());
