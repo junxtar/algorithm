@@ -46,6 +46,7 @@ public class bfs_dfs {
 			}
 		}
 	}
+	
 	public static void bfs(int v) {
 		Arrays.fill(visit, false);
 		Queue<Integer>queue = new LinkedList<>();
