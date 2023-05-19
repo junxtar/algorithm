@@ -19,6 +19,7 @@ public class number_1449 {
 		for (int i = 0; i < N; i++) {
 			arr[i] = Integer.parseInt(st.nextToken());
 		}
+		
 		Arrays.sort(arr);
 		
 		for (int i = 0; i < N; i++) {
