@@ -22,12 +22,15 @@ public class number_26009 {
 	}
 
 	static int N, M;
-	static int[] dxy = {1, 0, -1, 0, 1}; 
+	static int[] dxy = { 1, 0, -1, 0, 1 };
+	static int[] dx = {-1, 1, 1, -1};
+	static int[] dy = {1, 1, -1, -1};
 	static int[][] map;
 	static boolean[][] visited;
+	static StringBuilder sb = new StringBuilder();
 
 	public static void main(String[] args) throws IOException {
-		StringBuilder sb = new StringBuilder();
+
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		N = Integer.parseInt(st.nextToken());
@@ -42,34 +45,43 @@ public class number_26009 {
 			int col = Integer.parseInt(st.nextToken()) - 1;
 
 			int distance = Integer.parseInt(st.nextToken());
+			if (distance == 0) {
+				visited[row][col] = true;
+				continue;
+			}
 			trafficCongestion(row, col, distance);
 		}
-	
-	
-//		bfs(0, 0);
-//		if (map[N-1][M-1] == 0) {
-//			System.out.println("NO");
-//			return;
-//		}
-//		sb.append("YES").append("\n").append(map[N-1][M-1]);
-//		System.out.println(sb.toString());
+
+		int result = bfs(0, 0);
+		boolean isSuccess = result == -1 ? false : true;
+		if (isSuccess) {
+			sb.append("YES").append("\n").append(result);
+		} else {
+			sb.append("NO");
+		}
+
+		System.out.println(sb.toString());
 
 	}
 
 	static void trafficCongestion(int row, int col, int distance) {
+		int nx = row; 
+		int ny = col - distance; 
 		
-		for (int i = row - distance; i <= row + distance; i++) {
-			for (int j = col - distance; j <= col + distance; j++) {
-				if (Math.abs(i - row) + Math.abs(j - col) == distance) {
-					if (i < 0 | i >=N| j < 0 | j >= M)	continue;
-					visited[i][j] = true;
-				}
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < distance; j++) {
+				nx += dx[i];
+				ny += dy[i];
+				
+				if (nx < 0 | ny < 0 | nx >= N | ny >= M)
+					continue;
+				visited[nx][ny] = true;
 			}
 		}
-		
+
 	}
 
-	static void bfs(int row, int col) {
+	static int bfs(int row, int col) {
 		Queue<Node> q = new LinkedList<>();
 		q.offer(new Node(row, col, 0));
 		visited[row][col] = true;
@@ -77,20 +89,23 @@ public class number_26009 {
 		while (!q.isEmpty()) {
 			Node cur = q.poll();
 
+			if (cur.x == N - 1 && cur.y == M - 1) {
+				return cur.z;
+			}
 			for (int i = 0; i < 4; i++) {
 				int nx = cur.x + dxy[i];
-				int ny = cur.y + dxy[i+1];
+				int ny = cur.y + dxy[i + 1];
 
 				if (nx < 0 | ny < 0 | nx >= N | ny >= M)
 					continue;
 
 				if (!visited[nx][ny]) {
 					visited[nx][ny] = true;
-					map[nx][ny] = cur.z + 1;
 					q.offer(new Node(nx, ny, cur.z + 1));
 				}
 			}
 		}
+		return -1;
 	}
 
 }
