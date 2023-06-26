@@ -52,13 +52,10 @@ public class number_6497 {
 				grapgh.get(u).add(new Node(v, w));
 				grapgh.get(v).add(new Node(u, w));
 			}
-
 			prim();
 			sb.append(sum - answer).append("\n");
 		}
-
 		System.out.println(sb.toString());
-
 	}
 
 	static void prim() {
@@ -79,5 +76,4 @@ public class number_6497 {
 			}
 		}
 	}
-
 }
