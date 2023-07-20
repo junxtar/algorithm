@@ -21,6 +21,8 @@ public class number_2240 {
 		for (int i = 1; i <= T; i++) {
 			arr[i] = Integer.parseInt(br.readLine());
 		}
+		
+		
 		System.out.println(search());
 	}
 
