@@ -7,49 +7,43 @@ import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class number_2493 {
-	
+
 	static class Node {
 		int value;
 		int index;
-		
-		Node (int value, int index) {
+
+		Node(int value, int index) {
 			this.value = value;
 			this.index = index;
 		}
 	}
-	
+
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder();
+
 		Stack<Node> values = new Stack<>();
-		Stack<Integer> result = new Stack<>();
+
 		int N = Integer.parseInt(br.readLine());
+		Node[] arr = new Node[N];
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		int cnt = 0;
 		for (int i = 1; i <= N; i++) {
 			int value = Integer.parseInt(st.nextToken());
-			values.push(new Node(value, i));
+			arr[i - 1] = new Node(value, i);
 		}
-		int flag = values.pop().value;
-		
-		while (!values.isEmpty()) {
-			Node cur = values.pop();
-			cnt+=1;
-			if (flag < cur.value) {
-				flag = cur.value;
-				for (int i = 0 ; i < cnt; i ++) {
-					result.push(cur.index);
-				}
-				cnt = 0;
+
+		for (int i = 0; i < N; i++) {
+			while (!values.isEmpty() && values.peek().value < arr[i].value) {
+				values.pop();
+			}
+			if (values.isEmpty()) {
+				values.push(arr[i]);
+				sb.append(0).append(" ");
 				continue;
 			}
-		}
-		for (int i = 0; i <= cnt; i++) {
-			result.push(0);
-		}
-		
-		while (!result.isEmpty()) {
-			sb.append(result.pop()).append(" ");
+			sb.append(values.peek().index).append(" ");
+			values.push(arr[i]);
+
 		}
 		System.out.println(sb.toString());
 	}
