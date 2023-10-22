@@ -25,7 +25,6 @@ public class number_2211 {
 	static int[] nodeArray;
 	static int[] cost;
 	static ArrayList<ArrayList<Node>> grapgh;
-	static boolean[] visited;
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -37,7 +36,6 @@ public class number_2211 {
 
 		cost = new int[N + 1];
 		nodeArray = new int[N + 1];
-		visited = new boolean[N + 1];
 		Arrays.fill(cost, INF);
 		for (int i = 0; i <= N; i++) {
 			grapgh.add(new ArrayList<>());
