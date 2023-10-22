@@ -107,5 +107,4 @@ public class number_26009 {
 		}
 		return -1;
 	}
-
 }
