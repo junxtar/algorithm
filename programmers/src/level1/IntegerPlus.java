@@ -6,7 +6,6 @@ public class IntegerPlus {
 		for (int i = 0; i < absolutes.length; i++) {
 			int value = absolutes[i];
 			answer += signs[i] ? value : -1 * value;
-
 		}
 		return answer;
 	}
