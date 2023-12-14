@@ -4,13 +4,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 public class number_14676 {
 	static int N, M, K;
 
 	static ArrayList<ArrayList<Integer>> grapgh;
-	static ArrayList<ArrayList<Integer>> remove;
+	static ArrayList<Set<Integer>> remove;
 	static int[] seq;
 	static int[] build;
 
@@ -27,7 +29,7 @@ public class number_14676 {
 		grapgh = new ArrayList<>();
 		for (int i = 0; i < N + 1; i++) {
 			grapgh.add(new ArrayList<>());
-			remove.add(new ArrayList<>());
+			remove.add(new HashSet<>());
 		}
 		while (M-- > 0) {
 			st = new StringTokenizer(br.readLine());
@@ -41,7 +43,8 @@ public class number_14676 {
 			int command = Integer.parseInt(st.nextToken());
 			int num = Integer.parseInt(st.nextToken());
 
-			if (command == 1 && seq[num] != 0 || command == 2 && build[num] == 0) {
+			if ((command == 1 && seq[num] != 0) || 
+					(command == 2 && build[num] == 0)) {
 				System.out.println("Lier!");
 				System.exit(0);
 			}
