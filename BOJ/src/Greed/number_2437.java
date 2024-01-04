@@ -28,5 +28,4 @@ public class number_2437 {
 		result = sum + 1;
 		System.out.println(result);
 	}
-
 }
