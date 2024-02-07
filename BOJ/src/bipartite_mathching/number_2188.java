@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
 public class number_2188 {
 
 	static int N, M;
-	static ArrayList<Integer>[] edges;
+	static ArrayList<ArrayList<Integer>> edges;
 	static int[] house;
 	static boolean[] visited;
 
@@ -20,17 +20,17 @@ public class number_2188 {
 		N = Integer.parseInt(st.nextToken());
 		M = Integer.parseInt(st.nextToken());
 
-		edges = new ArrayList[N];
+		edges = new ArrayList<>();
 		house = new int[M];
 		visited = new boolean[M];
 		Arrays.fill(house, -1);
 
 		for (int i = 0; i < N; i++) {
-			edges[i] = new ArrayList<>();
+			edges.add(new ArrayList<>());
 			st = new StringTokenizer(br.readLine());
 			int s = Integer.parseInt(st.nextToken());
 			while (s-- > 0) {
-				edges[i].add(Integer.parseInt(st.nextToken()) - 1);
+				edges.get(i).add(Integer.parseInt(st.nextToken()) - 1);
 			}
 		}
 		int cnt = 0;
@@ -45,7 +45,7 @@ public class number_2188 {
 	}
 
 	static boolean matching(int cur) {
-		for (int next : edges[cur]) {
+		for (int next : edges.get(cur)) {
 			if (visited[next])
 				continue;
 			visited[next] = true;
