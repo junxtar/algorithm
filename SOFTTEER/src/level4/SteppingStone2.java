@@ -33,12 +33,7 @@ public class SteppingStone2 {
 	static void search() {
 		dp[1] = 1;
 		for (int i = 2; i < dp.length; i++) {
-			dp[i] = 1;
-			for (int j = 1; j < i; j++) {
-				if (arr[i] > arr[j] && dp[i] < dp[j] + 1) {
-					dp[i] = dp[j] + 1;
-				}
-			}
+
 		}
 		reverseDp[N] = 1;
 		for (int i = N - 1; i > 0; i--) {
