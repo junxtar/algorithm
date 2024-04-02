@@ -6,11 +6,11 @@ public class MultiToothburshSale {
 
 	// 각 사람의 포인트를 저장
 	// ex) "jun" : "400"
-	static HashMap<String, Integer> map = new HashMap<>();
+	private HashMap<String, Integer> map = new HashMap<>();
 
 	// 각 사람의 부모가 누군지 저장
 	// ex) "jun" : "temp"
-	static HashMap<String, String> connectMap = new HashMap<>();
+	private HashMap<String, String> connectMap = new HashMap<>();
 
 	public int[] solution(String[] enroll, String[] referral, String[] seller, int[] amount) {
 		init(enroll);
@@ -22,7 +22,7 @@ public class MultiToothburshSale {
 
 	// 각 멤버의 포인트 값을 0으로 초기화
 	// enroll 배열에는 최상위 부모 "-" 가 주어지지 않으므로 임의로 만들어 놓음
-	private static void init(String[] enroll) {
+	private void init(String[] enroll) {
 		map.put("-", 0);
 		for (int i = 0; i < enroll.length; i++) {
 			String name = enroll[i];
@@ -31,7 +31,7 @@ public class MultiToothburshSale {
 	}
 
 	// 주어진 배열에 따라 부모 연결
-	private static void connect(String[] enroll, String[] referral) {
+	private void connect(String[] enroll, String[] referral) {
 		for (int i = 0; i < enroll.length; i++) {
 			String name = enroll[i];
 			String parent = referral[i];
